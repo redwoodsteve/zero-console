@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Zero_Console")(type "KiCad")(uri "${KIPRJMOD}/Zero_Console.kicad_sym")(options "")(descr ""))
+)
