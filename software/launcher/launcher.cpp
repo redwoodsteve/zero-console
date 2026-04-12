@@ -74,6 +74,11 @@ void selectPrev(float& rotation, std::vector<Game> games) {
 	if (selected < 0) selected = games.size() - 1;
 }
 
+void renderButtons(float opacity, Texture2D upTex, Texture2D downTex, int w, int h) { // opacity is between 0 and 1
+	DrawTexture(upTex, w / 2 - 8, h / 2 - 24, WHITE);
+	DrawTexture(downTex, w / 2 - 8, h / 2 + 8, WHITE);
+}
+
 // map of key bindings
 std::map<KeyboardKey, void (*)(float&, std::vector<Game>)> keyBinds = {
 	{KEY_UP, selectNext},
@@ -81,46 +86,59 @@ std::map<KeyboardKey, void (*)(float&, std::vector<Game>)> keyBinds = {
 };
 
 int main() {
-	std::vector<Game> games = loadGames();
+	std::vector<Game> games = loadGames(); // load the list of games from the file
 
-	int w = 480;
+	int w = 480; // init window
 	int h = 320;
 	InitWindow(w, h, "launcher");
 	SetTargetFPS(60);
 
-	int canvasW = w / 4;
+	int canvasW = w / 4; // init the canvas to draw stuff on
 	int canvasH = h / 4;
 	RenderTexture2D canvas = LoadRenderTexture(canvasW, canvasH);
 
+	// ---- load resources ---- //
+	// fonts
 	Font mainFont = LoadFontEx("resources/Qaaxee.ttf", 32, 0, 250);
 
+	// textures
 	Image blank = GenImageColor(canvasW, canvasH, WHITE); // blank texture so that background shader can work
 	Texture2D backgroundTex = LoadTextureFromImage(blank);
 	UnloadImage(blank);
 
+	Texture2D buttonUp = LoadTexture("resources/button_up.png");
+	Texture2D buttonDown = LoadTexture("resources/button_down.png");
+	// shaders
 	Shader backgroundShader = LoadShader(0, "resources/background.fs");
 
+	// rendered angle of wheel
 	float currentAngle = 0;
 
+	// main loop
 	while (!WindowShouldClose()) {
 		currentAngle += (targetAngle - currentAngle) * 5.0f * GetFrameTime();
 
-		for (auto& [key, bind] : keyBinds) {
+		for (auto& [key, bind] : keyBinds) { // execute key binds
 			if (IsKeyPressed(key)) {
 				bind(targetAngle, games);
 			}
 		}
 
+		// start drawing on canvs
 		BeginTextureMode(canvas);
 			ClearBackground(RAYWHITE);
-			BeginShaderMode(backgroundShader);
-				DrawTexture(backgroundTex, 0, 0, WHITE);
+			BeginShaderMode(backgroundShader); // use the background shader
+				DrawTexture(backgroundTex, 0, 0, WHITE); // draw the background shader to a blank texture
 			EndShaderMode();
 			
+			// render the wheel outside of shader
+			renderButtons(1.0, buttonUp, buttonDown, canvasW, canvasH);
 			renderWheel(currentAngle, games, canvasW, canvasH / 2, canvasW / 2, mainFont);
 		EndTextureMode();
 
+		// start drawing on screen
 		BeginDrawing();
+			// draw contents of canvas onto a square the size of the screen
 			DrawTexturePro(canvas.texture,
 				Rectangle{0, 0, (float)canvas.texture.width, -(float)canvas.texture.height},
 				Rectangle{0, 0, (float)w, (float)h},

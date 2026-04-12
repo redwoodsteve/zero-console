@@ -12,11 +12,11 @@ For `games`:
 Common assets (textures, sounds, etc) to use throughout
 ## hardware
 The folder where you can find KiCad files, the BOM (LCSC parts) and JLCPCB files.<br>
-**Development:**
+**Development:**<br>
 Probably just send suggestions as pull requests, idk how I would set up a kicad project with github like this.<br>
-**Getting a PCB**<br>
+**Getting a PCB:**<br>
 You can easily upload the `production/Zero_Console.zip` file to JLCPCB and you will be able to produce it for **$2** for five!<br>
-**Parts**<br>
+**Parts:**<br>
 You can upload the bom.csv file to LCSC and it will automatically find the parts.
 For the display, [this one](https://a.co/d/03g2Kwg4) ($17) works well and is pretty cheap, but they're all the same chinese models.<br>
 You'll also need some pin headers for the display and pi.<br>
