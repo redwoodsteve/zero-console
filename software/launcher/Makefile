@@ -1,21 +1,19 @@
-CXX = g++
+ifeq ($(OS),Windows_NT)
+    # Windows Settings
+    LDFLAGS = -Llib/raylib/lib -lraylib -lopengl32 -lgdi32 -lwinmm -lpthread
+    INCLUDE = -Ilib/raylib/include -Ilib
+    EXE = launcher.exe
+else
+    # Raspberry Pi Settings
+    # We assume you ran 'sudo make install' when building raylib on the Pi
+    LDFLAGS = -lraylib -lGL -lm -lpthread -ldl -lrt
+    
+    # If you are using the DRM/KMS (No Desktop) mode, use these instead:
+    # LDFLAGS = -lraylib -lGLESv2 -lEGL -ldrm -lgbm -lpthread -lrt -lm -ldl
+    
+    INCLUDE = -I/usr/local/include -Ilib
+    EXE = launcher
+endif
 
-# Paths - Adjust these if your folder names are different
-RAYLIB_PATH = lib/raylib
-INCLUDE_PATH = -I$(RAYLIB_PATH)/include -Ilib
-LIBRARY_PATH = -L$(RAYLIB_PATH)/lib
-
-# Compiler Flags
-# -Wall: warnings, -std: modern C++
-CXXFLAGS = -Wall -std=c++17 -g $(INCLUDE_PATH)
-
-# Linker Flags 
-# NOTE: Order matters! -lraylib must come before the system libs
-LDFLAGS = $(LIBRARY_PATH) -lraylib -lopengl32 -lgdi32 -lwinmm -lpthread
-
-# The build rule
-launcher: launcher.cpp
-	$(CXX) $< -o $@ $(CXXFLAGS) $(LDFLAGS)
-
-clean:
-	del launcher.exe
+$(EXE): launcher.cpp
+	$(CXX) $< -o $@ $(CXXFLAGS) $(INCLUDE) $(LDFLAGS)
