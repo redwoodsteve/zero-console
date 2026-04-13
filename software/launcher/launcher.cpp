@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <cstdlib>
 #include "raylib.h"
 #include "raymath.h"
 #include "json.hpp"
@@ -13,7 +14,7 @@ const float WHEEL_FONT_SIZE_BASE_FACTOR = 0.5; // number to multiply font size f
 
 struct Game {
 	std::string name;
-	std::string path;
+	std::string run;
 };
 
 std::vector<Game> loadGames() { // load games from games.json into a vector, then return it
@@ -24,7 +25,7 @@ std::vector<Game> loadGames() { // load games from games.json into a vector, the
 	for (auto& item : data) {
 		games.push_back({ // push item to back of vector
 			item["name"].get<std::string>(),
-			item["path"].get<std::string>()
+			item["run"].get<std::string>()
 		});
 	}
 	return games;
@@ -72,6 +73,10 @@ void selectPrev(float& rotation, std::vector<Game> games) {
 	rotation -= spacing;
 	selected--;
 	if (selected < 0) selected = games.size() - 1;
+}
+
+void runGame(Game selectedGame) {
+	system(selectedGame.run.c_str());
 }
 
 void renderButtons(float opacity, Texture2D upTex, Texture2D downTex, int w, int h) { // opacity is between 0 and 1
@@ -122,6 +127,10 @@ int main() {
 			if (IsKeyPressed(key)) {
 				bind(targetAngle, games);
 			}
+		}
+		if (IsKeyPressed(KEY_Z)) {
+			CloseWindow();
+			runGame(games[selected]);
 		}
 
 		// start drawing on canvs

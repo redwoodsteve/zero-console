@@ -1,14 +1,14 @@
 [
 	{
 		"name": "Balatro",
-		"path": "/"
+		"run": "love ~/balatro.love"
 	},
 	{
 		"name": "Blackjack",
-		"path": "/"
+		"run": "/"
 	},
 	{
 		"name": "Bluetooth",
-		"path": "/"
+		"run": "/"
 	}
 ]
