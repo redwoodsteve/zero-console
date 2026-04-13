@@ -129,7 +129,7 @@ int main() {
 			}
 		}
 		if (IsKeyPressed(KEY_Z)) {
-			CloseWindow();
+			//CloseWindow();
 			runGame(games[selected]);
 		}
 
