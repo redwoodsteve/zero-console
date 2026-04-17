@@ -1,0 +1,3 @@
+ - sd card slightly covers right button
+ - screen is way too big
+ - power supply is always on (maybe fix with gpio-poweroff and some mosfet witchtrickery?)
