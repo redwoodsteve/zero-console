@@ -5,10 +5,10 @@ make
 
 cd /home/pi/zero-console/software/drivers
 
-cp -f drivers/launcher.service /etc/systemd/system/launcher.service
+cp -f launcher.service /etc/systemd/system/launcher.service
 systemctl start launcher
 
-cp -f drivers/shutdowngpio.service /etc/systemd/system/shutdowngpio.service
+cp -f shutdowngpio.service /etc/systemd/system/shutdowngpio.service
 systemctl start shutdowngpio
 
 cd /home/pi/
