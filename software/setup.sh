@@ -5,14 +5,10 @@ make
 
 cd /home/pi/zero-console/software/drivers
 
-if [ ! -f "/etc/systemd/system/launcher.service" ]; then
-	cp drivers/launcher.service /etc/systemd/system/launcher.service
-fi
+cp -f drivers/launcher.service /etc/systemd/system/launcher.service
 systemctl start launcher
 
-if [ ! -f "/etc/systemd/system/shutdowngpio.service" ]; then
-	cp drivers/shutdowngpio.service /etc/systemd/system/shutdowngpio.service
-fi
+cp -f drivers/shutdowngpio.service /etc/systemd/system/shutdowngpio.service
 systemctl start shutdowngpio
 
 cd /home/pi/
@@ -20,4 +16,4 @@ git clone https://github.com/katzenjens/lcd32.git
 cd lcd32
 ./install35.sh
 cd /home/pi/zero-console/software
-cp -u config.txt /boot/firmware/config.txt
+cp -f config.txt /boot/firmware/config.txt
