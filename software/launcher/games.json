@@ -5,7 +5,7 @@
 	},
 	{
 		"name": "Blackjack",
-		"run": "/"
+		"run": "love /home/pi/zero-console/software/games/blackjack.love"
 	},
 	{
 		"name": "Bluetooth",
