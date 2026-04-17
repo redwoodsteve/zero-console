@@ -8,7 +8,7 @@ User=pi
 WorkingDirectory=/home/pi/zero-console/software/launcher
 ExecStart=/usr/bin/startx /home/pi/zero-console/software/launcher/launcher
 Restart=always
-RestartSec=1
+RestartSec=2
 
 [Install]
 WantedBy=multi-user.target

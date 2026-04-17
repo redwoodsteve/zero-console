@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Balatro",
-		"run": "love ~/balatro.love"
+		"run": "love /home/pi/zero-console/software/games/balatro.love"
 	},
 	{
 		"name": "Blackjack",
