@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /home/pi/zero-console/software/launcher
-sudo apt install -y libgl1-mesa-dev libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libgpiod-dev love
+sudo apt install -y libgl1-mesa-dev libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev libgpiod-dev love matchbox-window-manager
 make
 
 cd /home/pi/zero-console/software/drivers
@@ -14,6 +14,8 @@ systemctl start shutdowngpio
 cp -f Xwrapper.config /etc/X11/Xwrapper.config
 
 systemctl daemon -reload
+
+cd /home/pi/zero-console/software
 
 cd /home/pi/
 git clone https://github.com/katzenjens/lcd32.git
