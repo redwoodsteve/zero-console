@@ -1,11 +1,14 @@
 # Lua Console
 A console which uses the RPi Zero 2 W
+## setup
+cd into `software`, and run `sudo ./setup.sh`
 ## software
 The folder which houses the software, such as the home screen. Basically all of this code is in C++ for a low memory footprint.<br>
 **Development:**<br>
 For `launcher`:
  - For windows, install MinGW64, open the UCRT64 console, CD into the launcher directory and use `make`
  - For linux, CD into the launcher directory and `make`<br>
+ - Make sure to install dependencies `sudo apt install -y libgl1-mesa-dev libx11-dev libxrandr-dev libxinerama-dev libxi-dev libxcursor-dev`
  
 For `games`:
  - finish this later lol
