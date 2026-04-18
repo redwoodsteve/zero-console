@@ -14,6 +14,8 @@ systemctl start shutdowngpio
 cp -f Xwrapper.config /etc/X11/Xwrapper.config
 
 systemctl daemon -reload
+systemctl restart launcher
+systemctl restart shutdowngpio
 
 cd /home/pi/zero-console/software
 

@@ -66,6 +66,8 @@ hdmi_cvt 480 320 60 6 0 0 0
 hdmi_drive=2
 display_rotate=0
 
+disable_touchscreen=1
+
 dtoverlay=dwc2
 dtoverlay=gpio-shutdown
 
