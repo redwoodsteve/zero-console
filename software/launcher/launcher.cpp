@@ -64,18 +64,19 @@ void renderWheel(float rotation, std::vector<Game> games, int circleX, int circl
 void selectNext(float& rotation, std::vector<Game> games) {
 	float spacing = (2.0f * PI) / games.size();
 	rotation += spacing;
-	selected++;
-	if (selected >= (int)games.size()) selected = 0;
+	selected--; // the selected++ and -- are swapped because its silly
+	if (selected < 0) selected = games.size() - 1;
 }
 // select the previous game in the wheel
 void selectPrev(float& rotation, std::vector<Game> games) {
 	float spacing = (2.0f * PI) / games.size();
 	rotation -= spacing;
-	selected--;
-	if (selected < 0) selected = games.size() - 1;
+	selected++;
+	if (selected >= (int)games.size()) selected = 0;
 }
 
 void runGame(Game selectedGame) {
+	CloseWindow();
 	system(selectedGame.run.c_str());
 }
 
